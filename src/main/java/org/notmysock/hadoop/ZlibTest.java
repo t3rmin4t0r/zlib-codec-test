@@ -34,9 +34,13 @@ public class ZlibTest {
     ByteBuffer src = ByteBuffer.allocateDirect(data.length);
     src.put(data);
     src.flip();
+    ByteBuffer src2 = src.duplicate();
     ByteBuffer dst = ByteBuffer.allocateDirect(4096);
     zlibDirectDecompressor.decompress(src, dst);
-    System.out.println(dst);
+    System.out.println("Good DST=" + dst);
+    ByteBuffer dst2 = ByteBuffer.allocate(4096);
+    zlibDirectDecompressor.decompress(src2, dst2);
+    System.out.println("Bad DST=" + dst2);
   }
 
 }
